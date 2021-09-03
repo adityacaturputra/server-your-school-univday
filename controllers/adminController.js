@@ -136,6 +136,7 @@ module.exports = {
         try {
             const { id } = req.params;
             const university = await University.findOne({ _id: id })
+            await Content.remove({universityId: university._id})
             const image = await Image.findOne({ _id: university.imageId })
             await fs.unlink(path.join(`public/${image.imageUrl}`))
             await university.remove()
@@ -148,6 +149,88 @@ module.exports = {
             req.flash('alertStatus', 'danger')
             console.log(error)
             res.redirect('/admin/university')
+        }
+    },
+
+    viewContent: async (req, res) => {
+        try {
+            const content = await Content.find().populate({path: 'universityId', select: '_id name'})
+            const university = await University.find()
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { message: alertMessage, status: alertStatus }
+            res.render('admin/content/view_content', { title: "univday | Content", alert, action: 'view', content, university, user: req.session.user })
+        } catch (error) {
+            req.flash('alertMessage', `Failed: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/dashboard')
+        }
+    },
+    addContent: async (req, res) => {
+        try {
+            const { name, universityId, jeroanKonten } = req.body
+            
+            await Content.create({ name, universityId, jeroanKonten })
+            req.flash('alertMessage', 'Success add Content')
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/content')
+            return
+        } catch (error) {
+            console.log(error)
+            req.flash('alertMessage', `Failed: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/content')
+        }
+    },
+    viewEditContent: async (req, res) => {
+        try {
+            const {id} = req.params
+            console.log(id)
+            const content = await Content.findOne({_id:id}).populate({path: 'universityId', select: '_id name'})
+            const university = await University.find()
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { message: alertMessage, status: alertStatus }
+            console.log(content)
+            res.render('admin/content/view_content', { title: "univday | Content", alert, action: 'edit', content, university, user: req.session.user })
+        } catch (error) {
+            req.flash('alertMessage', `Failed: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/dashboard')
+        }
+    },
+    editContent: async (req, res) => {
+        try {
+            const { name, universityId, jeroanKonten } = req.body;
+            const { id } = req.params
+            const content = await Content.findOne({ _id: id })
+            content.name = name
+            content.universityId = universityId
+            content.jeroanKonten = jeroanKonten
+            await content.save()
+            req.flash('alertMessage', 'Success update content')
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/content')
+        } catch (error) {
+            req.flash('alertMessage', `Failed update content: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            console.log(error)
+            res.redirect('/admin/content')
+        }
+    },
+    deleteContent: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const content = await Content.findOne({ _id: id })
+            await content.remove()
+            req.flash('alertMessage', 'Success delete content')
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/content')
+        } catch (error) {
+            req.flash('alertMessage', `Failed delete content: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            console.log(error)
+            res.redirect('/admin/content')
         }
     },
 

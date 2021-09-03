@@ -12,29 +12,34 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Logo</th>
+                        <th>University</th>
+                        <th>Title</th>
+                        <th>Content</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% for(let i=0; i < university.length; i++ ){ %>
+                    <% for(let i=0; i < content.length; i++ ){ %>
                         <tr>
                             <td>
                                 <%= i + 1 %>
                             </td>
                             <td>
-                                <%= university[i].name %>
+                                <%= content[i].universityId.name %>
                             </td>
                             <td>
-                                <img src="http://localhost:3000/<%= university[i].imageId.imageUrl %>" alt="" height="150px">
+                                <%= content[i].name %>
                             </td>
                             <td>
-                                <a href="javascript:void()" type="button"
+                                <%- content[i].jeroanKonten %>
+                            </td>
+                            <td>
+                                <a href="/admin/content/<%= content[i]._id %>" type="button"
                                     class="btn btn-warning btn-circle btn-sm button-update"
-                                    data-id="<%= university[i].id %>" data-name="<%= university[i].name %>"><i
-                                        class="fas fa-edit"></i></a>
-                                <form action="/admin/university/<%= university[i].id %>?_method=DELETE" method="POST"
+                                    >
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="/admin/content/<%= content[i].id %>?_method=DELETE" method="POST"
                                     style="display: inline;">
                                     <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
                                             class="fas fa-trash"></i></button>

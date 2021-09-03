@@ -4,6 +4,8 @@ const isLogin = (req, res, next) => {
         req.flash('alertStatus', 'danger')
         res.redirect('/admin/signin')
     }else {
+        var hour = 3600000
+        req.session.cookie.expires = new Date(Date.now() + hour)
         next()
     }
 }

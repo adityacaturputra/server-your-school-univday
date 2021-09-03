@@ -15,6 +15,13 @@ router.post('/university', upload, adminController.addUniversity)
 router.put('/university/', upload, adminController.editUniversity)
 router.delete('/university/:id', adminController.deleteUniversity)
 
+// Content endpoint
+router.get('/content', adminController.viewContent)
+router.get('/content/:id', adminController.viewEditContent)
+router.post('/content', adminController.addContent)
+router.put('/content/:id', adminController.editContent)
+router.delete('/content/:id', adminController.deleteContent)
+
 // Category endpoint
 // router.get('/category', adminController.viewCategory)
 // router.post('/category', adminController.addCategory)
