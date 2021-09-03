@@ -55,7 +55,7 @@ app.use('/users', usersRouter);
 // admin routes
 app.use('/admin', adminRouter);
 // api routes
-app.use('/api/v1/member', apiRouter);
+app.use('/api/v1/university', apiRouter);
 
 
 // catch 404 and forward to error handler
