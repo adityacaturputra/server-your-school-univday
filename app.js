@@ -35,7 +35,7 @@ app.use(methodOverride('_method'));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
-  rolling: true,
+  rolling: false,
   saveUninitialized: true,
   cookie: { maxAge: 60000 }
 }))
