@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 
 // import mongoose
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/db_univday', {
+mongoose.connect('mongodb+srv://adityacaturputra:sqkAmfiERitQGuCT@cluster0.reduu.mongodb.net/db_your_school_univday?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
