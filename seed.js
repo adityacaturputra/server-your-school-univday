@@ -79,7 +79,7 @@ var data = [
       {
         // done
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90cdb1'),
-        imageUrl: 'images/logo.png'
+        imageUrl: 'http://assets.stickpng.com/images/5842f8afa6515b1e0ad75b2b.png'
       },
     ]
   },

@@ -1,6 +1,5 @@
 const router = require('express').Router()
 const adminController = require('../controllers/adminController')
-const { upload } = require('../middlewares/multer')
 const auth = require('../middlewares/auth')
 
 router.get('/signin', adminController.viewSignin)
@@ -11,8 +10,8 @@ router.get('/dashboard', adminController.viewDashboard)
 
 // University endpoint
 router.get('/university', adminController.viewUniversity)
-router.post('/university', upload, adminController.addUniversity)
-router.put('/university/', upload, adminController.editUniversity)
+router.post('/university', adminController.addUniversity)
+router.put('/university/', adminController.editUniversity)
 router.delete('/university/:id', adminController.deleteUniversity)
 
 // Content endpoint

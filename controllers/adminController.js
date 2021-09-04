@@ -81,19 +81,12 @@ module.exports = {
     },
     addUniversity: async (req, res) => {
         try {
-            const { name } = req.body
-            if (req.file) {
-                const savedImage = await Image.create({imageUrl: `images/${req.file.filename}`})
-                await University.create({ name, imageId: savedImage._id })
-                req.flash('alertMessage', 'Success add University')
-                req.flash('alertStatus', 'success')
-                res.redirect('/admin/university')
-                return
-            }
-            req.flash('alertMessage', 'failed add University, please insert image')
-            req.flash('alertStatus', 'danger')
+            const { name, image } = req.body
+            const savedImage = await Image.create({imageUrl: image})
+            await University.create({ name, imageId: savedImage._id })
+            req.flash('alertMessage', 'Success add University')
+            req.flash('alertStatus', 'success')
             res.redirect('/admin/university')
-            
         } catch (error) {
             console.log(error)
             req.flash('alertMessage', `Failed: ${error.message}`)
@@ -103,14 +96,9 @@ module.exports = {
     },
     editUniversity: async (req, res) => {
         try {
-            const { id, name } = req.body;
+            const { id, name, image } = req.body;
             const university = await University.findOne({ _id: id })
-            if (req.file) {
-                const deletedImage = await Image.findOne({_id: university.imageId})
-                await fs.unlink(path.join(`public/${deletedImage.imageUrl}`))
-                const savedImage = await Image.create({imageUrl: `images/${req.file.filename}`})
-                university.imageId = savedImage._id
-            }
+            await Image.findOneAndUpdate({_id: university.imageId}, {imageUrl: image})
             university.name = name
             await university.save()
             req.flash('alertMessage', 'Success update university')
