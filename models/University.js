@@ -12,7 +12,7 @@ const universitySchema = new mongoose.Schema({
     },
     contentId: [{
         type: ObjectId,
-        ref: "Content"
+        ref: 'Content'
     }]
 })
 

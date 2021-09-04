@@ -170,7 +170,10 @@ module.exports = {
         try {
             const { name, universityId, jeroanKonten } = req.body
             
-            await Content.create({ name, universityId, jeroanKonten })
+            content = await Content.create({ name, jeroanKonten, universityId })
+            university = await University.findOne({_id: universityId})
+            university.contentId.push(content._id)
+            await university.save()
             req.flash('alertMessage', 'Success add Content')
             req.flash('alertStatus', 'success')
             res.redirect('/admin/content')
@@ -222,6 +225,9 @@ module.exports = {
         try {
             const { id } = req.params;
             const content = await Content.findOne({ _id: id })
+            const university = await University.findOne({_id: content.universityId})
+            university.contentId = university.contentId.filter(content => content !== id)
+            await university.save()
             await content.remove()
             req.flash('alertMessage', 'Success delete content')
             req.flash('alertStatus', 'success')
