@@ -1,11 +1,4 @@
-const Item = require('../models/Item')
-const Treasure = require('../models/Activity')
-const Traveler = require('../models/Member')
-const Category = require('../models/Category')
-const Bank = require('../models/Bank')
-const Booking = require('../models/Booking')
 const University = require('../models/University')
-const Content = require('../models/Content')
 
 module.exports = {
     getAllUniversities: async (req, res) => {
@@ -15,7 +8,7 @@ module.exports = {
                 .populate({path : 'imageId', select: '_id imageUrl'})    
             res.status(200).json({university})
         } catch (error) {
-            
+            res.status(500).json({error})
         }
     },
 }

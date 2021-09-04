@@ -1,17 +1,8 @@
-const Category = require('../models/Category');
-const Bank = require('../models/Bank');
-const Item = require('../models/Item');
 const Image = require('../models/Image');
-const Feature = require('../models/Feature');
-const Activity = require('../models/Activity');
 const Users = require('../models/Users');
-const Booking = require('../models/Booking');
-const Member = require('../models/Member');
-const mongoose = require('mongoose');
 const fs = require('fs-extra');
 const path = require('path');
 const bcrypt = require('bcryptjs');
-const ObjectId = mongoose.Types.ObjectId;
 
 const University = require('../models/University')
 const Content = require('../models/Content')
@@ -81,7 +72,7 @@ module.exports = {
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
             const alert = { message: alertMessage, status: alertStatus }
-            res.render('admin/University/view_university', { title: "univday | University", alert, university, user: req.session.user })
+            res.render('admin/university/view_university', { title: "univday | University", alert, university, user: req.session.user })
         } catch (error) {
             req.flash('alertMessage', `Failed: ${error.message}`)
             req.flash('alertStatus', 'danger')
