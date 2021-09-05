@@ -60,7 +60,7 @@ module.exports = {
         try {
             const universities = await University.find()
             const contents = await Content.find()
-            res.render('admin/dashboard/view_dashboard', { title: "univday | Dashboard", universities, contents, user: req.session.user })
+            res.render('admin/dashboard/view_dashboard', { title: "Univday | Dashboard", universities, contents, user: req.session.user })
         } catch (error) {
             res.redirect('/admin/dashboard')
         }
@@ -72,7 +72,7 @@ module.exports = {
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
             const alert = { message: alertMessage, status: alertStatus }
-            res.render('admin/University/view_university', { title: "univday | University", alert, university, user: req.session.user })
+            res.render('admin/University/view_university', { title: "Univday | University", alert, university, user: req.session.user })
         } catch (error) {
             req.flash('alertMessage', `Failed: ${error.message}`)
             req.flash('alertStatus', 'danger')
@@ -137,7 +137,7 @@ module.exports = {
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
             const alert = { message: alertMessage, status: alertStatus }
-            res.render('admin/content/view_content', { title: "univday | Content", alert, action: 'view', content, university, user: req.session.user })
+            res.render('admin/content/view_content', { title: "Univday | Content", alert, action: 'view', content, university, user: req.session.user })
         } catch (error) {
             req.flash('alertMessage', `Failed: ${error.message}`)
             req.flash('alertStatus', 'danger')
@@ -173,7 +173,7 @@ module.exports = {
             const alertStatus = req.flash('alertStatus');
             const alert = { message: alertMessage, status: alertStatus }
             console.log(content)
-            res.render('admin/content/view_content', { title: "univday | Content", alert, action: 'edit', content, university, user: req.session.user })
+            res.render('admin/content/view_content', { title: "Univday | Content", alert, action: 'edit', content, university, user: req.session.user })
         } catch (error) {
             req.flash('alertMessage', `Failed: ${error.message}`)
             req.flash('alertStatus', 'danger')
