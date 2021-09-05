@@ -117,7 +117,6 @@ module.exports = {
             const university = await University.findOne({ _id: id })
             await Content.remove({universityId: university._id})
             const image = await Image.findOne({ _id: university.imageId })
-            await fs.unlink(path.join(`public/${image.imageUrl}`))
             await university.remove()
             await image.remove()
             req.flash('alertMessage', 'Success delete university')
