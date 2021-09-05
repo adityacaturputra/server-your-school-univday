@@ -182,9 +182,15 @@ module.exports = {
     },
     editContent: async (req, res) => {
         try {
-            const { name, universityId, jeroanKonten } = req.body;
+            const { name, universityId, jeroanKonten, oldUniversityId } = req.body;
             const { id } = req.params
             const content = await Content.findOne({ _id: id })
+            const oldUniversity = await University.findOne({_id: oldUniversityId })
+            oldUniversity.contentId = oldUniversity.contentId.filter(e => String(e) !== String(content._id))
+            await oldUniversity.save()
+            university = await University.findOne({_id: universityId})
+            university.contentId.push(content._id)
+            await university.save() 
             content.name = name
             content.universityId = universityId
             content.jeroanKonten = jeroanKonten
