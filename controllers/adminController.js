@@ -210,7 +210,7 @@ module.exports = {
             const { id } = req.params;
             const content = await Content.findOne({ _id: id })
             const university = await University.findOne({_id: content.universityId})
-            university.contentId = university.contentId.filter(content => content !== id)
+            university.contentId = university.contentId.filter(content => String(content) !== String(id))
             await university.save()
             await content.remove()
             req.flash('alertMessage', 'Success delete content')
