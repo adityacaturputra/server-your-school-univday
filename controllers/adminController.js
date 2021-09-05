@@ -15,7 +15,7 @@ module.exports = {
             const alertStatus = req.flash('alertStatus');
             const alert = { message: alertMessage, status: alertStatus }
             if(req.session.user == null || req.session.user == undefined) {
-                res.render('index', {alert, title: "Staycation | Login" })
+                res.render('index', {alert, title: "Univday | Login" })
             }else {
                 res.redirect('/admin/dashboard')
             }
