@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const ObjectId = mongoose.SchemaTypes.ObjectId
 
 const usersSchema = new mongoose.Schema({
     username: {
@@ -10,6 +11,10 @@ const usersSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    roleId: {
+        type: ObjectId,
+        ref: 'University'
+    }
 })
 
 usersSchema.pre('save', async function(next) {

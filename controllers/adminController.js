@@ -43,7 +43,8 @@ module.exports = {
             }
             req.session.user = {
                 id: user.id,
-                username: user.username
+                username: user.username,
+                roleId: user.roleId
             }
             res.redirect('/admin/dashboard')
         } catch (error) {
@@ -96,8 +97,8 @@ module.exports = {
     },
     editUniversity: async (req, res) => {
         try {
-            const { id, name, image } = req.body;
-            const university = await University.findOne({ _id: id })
+            const { universityId, name, image } = req.body;
+            const university = await University.findOne({ _id: universityId })
             await Image.findOneAndUpdate({_id: university.imageId}, {imageUrl: image})
             university.name = name
             await university.save()
@@ -166,7 +167,6 @@ module.exports = {
     viewEditContent: async (req, res) => {
         try {
             const {id} = req.params
-            console.log(id)
             const content = await Content.findOne({_id:id}).populate({path: 'universityId', select: '_id name'})
             const university = await University.find()
             const alertMessage = req.flash('alertMessage');
@@ -221,6 +221,59 @@ module.exports = {
             req.flash('alertStatus', 'danger')
             console.log(error)
             res.redirect('/admin/content')
+        }
+    },
+    viewUser: async (req, res) => {
+        try {
+            const users = await Users.find()
+                .populate({ path: 'roleId', select: '_id name' });
+            const university = await University.find();
+            const alertMessage = req.flash('alertMessage');
+            const alertStatus = req.flash('alertStatus');
+            const alert = { message: alertMessage, status: alertStatus }
+            res.render('admin/member/view_member', { title: "Univday | User", alert, users, university, user: req.session.user })
+        } catch (error) {
+            req.flash('alertMessage', `Failed: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/dashboard')
+        }
+    },
+    addUser: async (req, res) => {
+        try {
+            const { username, password, roleId } = req.body
+            const users = await Users.find({username})
+            if (users.length === 0) {
+                await Users.create({ username, password, roleId })
+                req.flash('alertMessage', 'Success add User')
+                req.flash('alertStatus', 'success')
+                res.redirect('/admin/user')
+                return
+            } else {
+                req.flash('alertMessage', 'username tadinya sudah ada')
+                req.flash('alertStatus', 'danger')
+                res.redirect('/admin/user')
+                return
+            }
+        } catch (error) {
+            console.log(error)
+            req.flash('alertMessage', `Failed: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            res.redirect('/admin/user')
+        }
+    },
+    deleteUser: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const users = await Users.findOne({ _id: id })
+            await users.remove()
+            req.flash('alertMessage', 'Success delete user')
+            req.flash('alertStatus', 'success')
+            res.redirect('/admin/user')
+        } catch (error) {
+            req.flash('alertMessage', `Failed delete user: ${error.message}`)
+            req.flash('alertStatus', 'danger')
+            console.log(error)
+            res.redirect('/admin/user')
         }
     },
 }

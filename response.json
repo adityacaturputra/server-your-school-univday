@@ -1,0 +1,43 @@
+{
+    "university":
+    [
+        {
+            "_id": "ObjectId",
+            "name": "string",
+            "imageId": {
+                "_id": "ObjectId",
+                "imageUrl": "string"
+            },
+            "contentId": [
+                {
+                    "_id": "ObjectId",
+                    "name": "string",
+                    "jeroanKonten": "string"
+
+                },
+                {
+                    "_id": "ObjectId",
+                    "name": "string",
+                    "jeroanKonten": "string"
+
+                }
+            ]
+        },
+        {
+            "_id": "ObjectId",
+            "name": "string",
+            "imageId": {
+                "_id": "ObjectId",
+                "imageUrl": "string"
+            },
+            "contentId": [
+                {
+                    "_id": "ObjectId",
+                    "name": "string",
+                    "jeroanKonten": "string"
+
+                }
+            ]
+        }
+    ]
+}
