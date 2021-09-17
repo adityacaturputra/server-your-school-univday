@@ -21,7 +21,12 @@
                         <select class="form-control" id="university" name="universityId" required>
                             <option value="">Pilih Universitas</option>
                             <% for( let i = 0; i < university.length; i++ ) { %>
-                                <option value="<%= university[i]._id %>"><%= university[i].name %></option>
+                                <% if (String(university[i]._id) === String(user.roleId)) { %>
+                                    <option value="<%= university[i]._id %>" selected><%= university[i].name %></option>
+                                <% } %>
+                                <% if (user.roleId == null) { %>
+                                    <option value="<%= university[i]._id %>"><%= university[i].name %></option>
+                                <% } %>
                             <% } %>
                         </select>
                     </div>

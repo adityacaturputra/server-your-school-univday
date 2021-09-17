@@ -1,9 +1,11 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-modal">
-            <i class="fas fa-plus"></i>
-        </button>
+        <% if (!user.roleId) { %>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-modal">
+                <i class="fas fa-plus"></i>
+            </button>
+        <% } %>
 
     </div>
     <div class="card-body">
@@ -19,29 +21,33 @@
                 </thead>
                 <tbody>
                     <% for(let i=0; i < university.length; i++ ){ %>
-                        <tr>
-                            <td>
-                                <%= i + 1 %>
-                            </td>
-                            <td>
-                                <%= university[i].name %>
-                            </td>
-                            <td>
-                                <img src="<%= university[i].imageId.imageUrl %>" alt="" height="50px" width="50px">
-                            </td>
-                            <td>
-                                <a href="javascript:void()" type="button"
-                                    class="btn btn-warning btn-circle btn-sm button-update"
-                                    data-id="<%= university[i].id %>" data-name="<%= university[i].name %>" data-image="<%= university[i].imageId.imageUrl %>">
-                                    <i class="fas fa-edit"></i></a>
-                                <form action="/admin/university/<%= university[i].id %>?_method=DELETE" method="POST"
-                                    style="display: inline;">
-                                    <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
-                                            class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
+                        <% if (user.roleId == university[i]._id || user.roleId == null) { %>
+                            <tr>
+                                <td>
+                                    <%= i + 1 %>
+                                </td>
+                                <td>
+                                    <%= university[i].name %>
+                                </td>
+                                <td>
+                                    <img src="<%= university[i].imageId.imageUrl %>" alt="" height="50px" width="50px">
+                                </td>
+                                <td>
+                                    <a href="javascript:void()" type="button"
+                                        class="btn btn-warning btn-circle btn-sm button-update"
+                                        data-id="<%= university[i].id %>" data-name="<%= university[i].name %>" data-image="<%= university[i].imageId.imageUrl %>">
+                                        <i class="fas fa-edit"></i></a>
+                                        <% if (user.roleId == null) { %>
+                                            <form action="/admin/university/<%= university[i].id %>?_method=DELETE" method="POST"
+                                                style="display: inline;">
+                                                <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
+                                                        class="fas fa-trash"></i></button>
+                                            </form>
+                                        <% } %>
+                                </td>
+                            </tr>
                         <% } %>
+                    <% } %>
                 </tbody>
 
             </table>

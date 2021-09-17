@@ -13,7 +13,9 @@
                         <% if (String(university[i]._id) === String(content.universityId._id)) { %>
                             <option value="<%= university[i]._id %>" selected><%= university[i].name %></option>
                         <% } %>
-                        <option value="<%= university[i]._id %>"><%= university[i].name %></option>
+                        <% if (user.roleId == null) { %>
+                            <option value="<%= university[i]._id %>"><%= university[i].name %></option>
+                        <% } %>
                     <% } %>
                 </select>
             </div>

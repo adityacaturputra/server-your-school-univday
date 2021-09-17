@@ -69,7 +69,9 @@
             </div>
         </div>
     </div>
-    <%- include('./add_modal.ejs') %>
+    <% if (!user.roleId) { %>
+        <%- include('./add_modal.ejs') %>
+    <% } %>
         <%- include('./edit_modal.ejs') %>
             <%- include('../../partials/js.ejs') %>
 
