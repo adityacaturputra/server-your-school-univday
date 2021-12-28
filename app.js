@@ -6,6 +6,7 @@ var logger = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const cors = require('cors')
 
 // import mongoose
 const mongoose = require('mongoose');
@@ -27,6 +28,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// cors
+app.use(cors())
 
 // use method-override
 app.use(methodOverride('_method'));
