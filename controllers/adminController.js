@@ -116,10 +116,11 @@ module.exports = {
         try {
             const { id } = req.params;
             const university = await University.findOne({ _id: id })
-            await Content.remove({universityId: university._id})
             const image = await Image.findOne({ _id: university.imageId })
             await university.remove()
             await image.remove()
+            await Content.remove({universityId: university._id})
+            await Users.remove({roleId: id})
             req.flash('alertMessage', 'Success delete university')
             req.flash('alertStatus', 'success')
             res.redirect('/admin/university')
