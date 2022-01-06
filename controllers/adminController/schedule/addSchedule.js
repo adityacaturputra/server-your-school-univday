@@ -3,9 +3,13 @@ const Schedule = require('../../../models/Schedule');
 module.exports = async (req, res) => {
   try {
     const {
-      name, universityId, timeStartDate, timeEndDate,
+      name, timeStartDate, timeEndDate,
     } = req.body;
+    let { universityId } = req.body;
     const { userUniversityId } = req.session.user;
+    if (universityId === '') {
+      universityId = null;
+    }
     if (!userUniversityId) {
       await Schedule.create({
         name, universityId, timeStartDate, timeEndDate,
