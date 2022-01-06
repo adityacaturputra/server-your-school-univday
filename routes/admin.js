@@ -25,7 +25,9 @@ router.delete('/content/:universityId/:id', authPost, adminController.content.de
 
 // Schedule endpoint
 router.get('/schedule', adminController.schedule.viewSchedule);
-router.post('/schedule', adminController.schedule.addSchedule);
+router.post('/schedule', authSuper, adminController.schedule.addSchedule);
+router.put('/schedule', authPost, adminController.schedule.editSchedule);
+router.delete('/schedule/:id', authSuper, adminController.schedule.deleteSchedule);
 
 // User endpoint
 router.get('/user', adminController.user.viewUser);

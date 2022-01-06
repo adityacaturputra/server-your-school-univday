@@ -30,9 +30,16 @@
                             <td>
                                 <%= schedule[i].name %>
                             </td>
-                            <td>
-                                <%= schedule[i].universityId.name %>
-                            </td>
+                            <% if (schedule[i].universityId === null) { %>
+                                <td>
+                                    Umum
+                                </td>
+                            <% } else { %>
+                                <td>
+                                    <%= schedule[i].universityId.name %>
+                                </td>
+                            <% } %>
+                             
                             <td>
                                 <%= schedule[i].timeStartDate %>
                             </td>
@@ -40,22 +47,37 @@
                                 <%= schedule[i].timeEndDate %>
                             </td>
                             <td>
-                                <a href="javascript:void()" type="button"
+                                <% if (!schedule[i].universityId && !user.universityId) { %>
+                                    <a href="javascript:void()" type="button"
                                     class="btn btn-warning btn-circle btn-sm button-update"
                                     data-id="<%= schedule[i].id %>"
-                                    data-name="<%= university[i].name %>"
-                                    data-universityId="<%= schedule[i].universityId.id %>"
+                                    data-name="<%= schedule[i].name %>"
+                                    data-universityId="<%= null %>"
                                     data-time-start-date="<%= schedule[i].timeStartDate %>"
                                     data-time-end-date="<%= schedule[i].timeEndDate %>"
-                                >
+                                    >
                                     <i class="fas fa-edit"></i></a>
-                                    <% if (user.universityId == null) { %>
-                                        <form action="/admin/schedule/<%= schedule[i].id %>?_method=DELETE" method="POST"
-                                            style="display: inline;">
-                                            <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
+                                <% } else { %>
+                                    <% if (schedule[i].universityId?.id === user.universityId || !user.universityId) { %>
+                                        <a href="javascript:void()" type="button"
+                                        class="btn btn-warning btn-circle btn-sm button-update"
+                                        data-id="<%= schedule[i].id %>"
+                                        data-name="<%= schedule[i].name %>"
+                                        data-universityId="<%= schedule[i].universityId.id %>"
+                                        data-time-start-date="<%= schedule[i].timeStartDate %>"
+                                        data-time-end-date="<%= schedule[i].timeEndDate %>"
+                                        >
+                                        <i class="fas fa-edit"></i></a>
                                     <% } %>
+                                <% } %>
+                                <% if (user.universityId == null) { %>
+                                    <form action="/admin/schedule/<%= schedule[i].id %>?_method=DELETE" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
+                                                class="fas fa-trash"></i></button>
+                                    </form>
+                                
+                                <% } %>
                             </td>
                         </tr>
                     <% } %>
