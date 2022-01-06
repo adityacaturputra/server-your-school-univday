@@ -18,7 +18,6 @@ mongoose.connect('mongodb+srv://adityacaturputra:sqkAmfiERitQGuCT@cluster0.reduu
 });
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 // admin routes
 var adminRouter = require('./routes/admin');
 var apiRouter = require('./routes/api');
@@ -55,7 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbootstrap-sb-admin-2'))); // menambahkan static file untuk sb-admin-2
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 // admin routes
 app.use('/admin', adminRouter);
 // api routes

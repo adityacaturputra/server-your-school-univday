@@ -3,26 +3,12 @@ const bcrypt = require('bcryptjs')
 const ObjectId = mongoose.SchemaTypes.ObjectId
 
 const usersSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    name: {
-        type: String
-    },
-    universityId: {
+    divisionId: {
         type: ObjectId,
-        ref: 'University'
+        ref: 'Division'
     },
-    panitiaId: {
-        type: Boolean
-    },
-    contact: {
-        type: String
+    isDivisionLead: {
+        type: Boolean 
     }
 })
 

@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     <% for(let i=0; i < content.length; i++ ){ %>
-                        <% if (user.roleId == content[i].universityId._id || user.roleId == null) { %>
+                        <% if (user.universityId == content[i].universityId._id || user.universityId == null) { %>
                             <tr>
                                 <td>
                                     <%= i + 1 %>

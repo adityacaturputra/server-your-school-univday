@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="university">Role</label>
-                        <select class="form-control" id="university" name="roleId" required>
+                        <select class="form-control" id="university" name="universityId" required>
                             <option value="">Pilih Role</option>
                             <% for( let i = 0; i < university.length; i++ ) { %>
                                 <option value="<%= university[i]._id %>"><%= university[i].name %></option>

@@ -44,7 +44,7 @@ module.exports = {
             req.session.user = {
                 id: user.id,
                 username: user.username,
-                roleId: user.roleId
+                universityId: user.universityId
             }
             res.redirect('/admin/dashboard')
         } catch (error) {
@@ -68,8 +68,14 @@ module.exports = {
     },
     viewUniversity: async (req, res) => {
         try {
-            const university = await University.find()
-                .populate({ path: 'imageId', select: 'id imageUrl' })
+            let university;
+            if(req.session.user.universityId !== null) {
+                university = await University.find({_id: req.session.user.universityId})
+                    .populate({ path: 'imageId', select: 'id imageUrl' })
+            } else {
+                university = await University.find()
+                    .populate({ path: 'imageId', select: 'id imageUrl' })
+            }
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
             const alert = { message: alertMessage, status: alertStatus }
@@ -120,7 +126,7 @@ module.exports = {
             await university.remove()
             await image.remove()
             await Content.remove({universityId: university._id})
-            await Users.remove({roleId: id})
+            await Users.remove({universityId: id})
             req.flash('alertMessage', 'Success delete university')
             req.flash('alertStatus', 'success')
             res.redirect('/admin/university')
@@ -134,7 +140,13 @@ module.exports = {
 
     viewContent: async (req, res) => {
         try {
-            const content = await Content.find().populate({path: 'universityId', select: '_id name'})
+            let content
+            console.log(req.session.user.universityId)
+            if (req.session.user.universityId !== null) {
+                content = await Content.find({universityId: req.session.user.universityId}).populate({path: 'universityId', select: '_id name'})
+            } else {
+                content = await Content.find().populate({path: 'universityId', select: '_id name'})
+            }
             const university = await University.find()
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
@@ -227,7 +239,7 @@ module.exports = {
     viewUser: async (req, res) => {
         try {
             const users = await Users.find()
-                .populate({ path: 'roleId', select: '_id name' });
+                .populate({ path: 'universityId', select: '_id name' });
             const university = await University.find();
             const alertMessage = req.flash('alertMessage');
             const alertStatus = req.flash('alertStatus');
@@ -241,10 +253,10 @@ module.exports = {
     },
     addUser: async (req, res) => {
         try {
-            const { username, password, roleId } = req.body
+            const { username, password, universityId } = req.body
             const users = await Users.find({username})
             if (users.length === 0) {
-                await Users.create({ username, password, roleId })
+                await Users.create({ username, password, universityId })
                 req.flash('alertMessage', 'Success add User')
                 req.flash('alertStatus', 'success')
                 res.redirect('/admin/user')

@@ -1,7 +1,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <!-- Button trigger modal -->
-        <% if (!user.roleId) { %>
+        <% if (!user.universityId) { %>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-modal">
                 <i class="fas fa-plus"></i>
             </button>
@@ -16,14 +16,14 @@
                         <th>No</th>
                         <th>Username</th>
                         <th>University Role</th>
-                        <% if (!user.roleId) { %>
+                        <% if (!user.universityId) { %>
                             <th>Action</th>
                         <% } %>
                     </tr>
                 </thead>
                 <tbody>
                     <% for(let i=0; i < users.length; i++ ){ %>
-                        <% if (users[i].roleId) { %>
+                        <% if (users[i].universityId) { %>
                             <tr>
                                 <td>
                                     <%= i + 1 %>
@@ -32,9 +32,9 @@
                                     <%= users[i].username %>
                                 </td>
                                 <td>
-                                    <%= users[i].roleId?.name ? users[i].roleId.name : 'admin'  %>
+                                    <%= users[i].universityId?.name ? users[i].universityId.name : 'admin'  %>
                                 </td>
-                                <% if (!user.roleId) { %>
+                                <% if (!user.universityId) { %>
                                     <td>
                                         <form action="/admin/user/<%= users[i].id %>?_method=DELETE" method="POST"
                                             style="display: inline;">
