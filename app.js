@@ -1,15 +1,16 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
-const cors = require('cors')
+const cors = require('cors');
 
 // import mongoose
 const mongoose = require('mongoose');
+
 mongoose.connect('mongodb+srv://adityacaturputra:sqkAmfiERitQGuCT@cluster0.reduu.mongodb.net/db_your_school_univday?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -17,19 +18,19 @@ mongoose.connect('mongodb+srv://adityacaturputra:sqkAmfiERitQGuCT@cluster0.reduu
   useFindAndModify: false,
 });
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 // admin routes
-var adminRouter = require('./routes/admin');
-var apiRouter = require('./routes/api');
+const adminRouter = require('./routes/admin');
+const apiRouter = require('./routes/api');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // cors
-app.use(cors())
+app.use(cors());
 
 // use method-override
 app.use(methodOverride('_method'));
@@ -40,8 +41,8 @@ app.use(session({
   resave: false,
   rolling: true,
   saveUninitialized: true,
-  cookie: { maxAge: 60000 }
-}))
+  cookie: { maxAge: 60000 },
+}));
 
 // use connect-flash
 app.use(flash());
@@ -57,16 +58,16 @@ app.use('/', indexRouter);
 // admin routes
 app.use('/admin', adminRouter);
 // api routes
-app.use('/api/v1/university', apiRouter);
-
+app.use('/api/v1', apiRouter);
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
