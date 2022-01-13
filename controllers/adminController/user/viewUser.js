@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');
     const alert = { message: alertMessage, status: alertStatus };
+    console.log(users);
+    console.log(req.session.user);
     res.render('admin/member/view_member', {
       title: 'Univday | User', alert, users, university, user: req.session.user,
     });

@@ -16,9 +16,7 @@
                         <th>No</th>
                         <th>Username</th>
                         <th>University Role</th>
-                        <% if (!user.universityId) { %>
-                            <th>Action</th>
-                        <% } %>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,15 +32,47 @@
                                 <td>
                                     <%= users[i].universityId?.name ? users[i].universityId.name : 'admin'  %>
                                 </td>
-                                <% if (!user.universityId) { %>
-                                    <td>
-                                        <form action="/admin/user/<%= users[i].id %>?_method=DELETE" method="POST"
-                                            style="display: inline;">
-                                            <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                <% } %>
+                                <td>
+                                    <% if (user.universityId && (user.universityId === users[i].universityId.id && users[i].panitiaId)) { %>
+                                        <a href="javascript:void()" type="button"
+                                                class="btn btn-warning btn-circle btn-sm button-update"
+                                                data-id="<%= users[i].id %>"
+                                                data-name="<%= users[i].name %>"
+                                                data-contact="<%= users[i].contact %>"
+                                                >
+                                                <i class="fas fa-edit"></i>
+                                        </a>
+                                    <% } %>
+                                    <% if (!user.universityId) { %>
+                                            
+                                            <% if (!users[i].panitiaId) { %>
+                                                <form action="/admin/user/<%= users[i].id %>?_method=PUT" method="POST"
+                                                    style="display: inline;"
+                                                    >
+                                                    <button type="submit" href="" class="btn btn-info btn-sm">Set as contact person</button>
+                                                </form>
+                                            <% } else { %>
+                                                <a href="javascript:void()" type="button"
+                                                class="btn btn-warning btn-circle btn-sm button-update"
+                                                data-id="<%= users[i].id %>"
+                                                data-name="<%= users[i].name %>"
+                                                data-contact="<%= users[i].contact %>"
+                                                >
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form action="/admin/user/<%= users[i].id %>?_method=PUT" method="POST"
+                                                    style="display: inline;">
+                                                    <button type="submit" href="" class="btn btn-danger btn-sm">Unlink contact person</button>
+                                                </form>
+                                            <% } %>
+                                                
+                                            <form action="/admin/user/<%= users[i].id %>?_method=DELETE" method="POST"
+                                                style="display: inline;">
+                                                <button type="submit" href="" class="btn btn-danger btn-circle btn-sm"><i
+                                                        class="fas fa-trash"></i></button>
+                                            </form>
+                                    <% } %>
+                                </td>
                             </tr>
                         <% } %>
                     <% } %>

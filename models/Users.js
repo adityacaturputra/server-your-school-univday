@@ -14,18 +14,12 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  name: {
-    type: String,
-  },
   universityId: {
     type: ObjectId,
     ref: 'University',
   },
   panitiaId: {
     type: Boolean,
-  },
-  contact: {
-    type: String,
   },
 });
 
