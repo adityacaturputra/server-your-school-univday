@@ -70,6 +70,7 @@
         </div>
     </div>
     <%- include('./add_modal.ejs') %>
+    <%- include('./edit_member.ejs') %>
             <%- include('../../partials/js.ejs') %>
 
             <script>
@@ -77,10 +78,12 @@
                     let id = $(this).data('id')
                     let name = $(this).data('name')
                     let contact = $(this).data('contact')
-
+                    let universityId = $(this).data('univid')
+                    
                     $('#edit-modal').modal('show');
                     $('.id').val(id)
                     $('.name').val(name)
                     $('.contact').val(contact)
+                    $('.universityId').val(universityId)
                 });
             </script>

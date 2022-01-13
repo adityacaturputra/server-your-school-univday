@@ -3,6 +3,7 @@ const Users = require('../../../models/Users');
 const University = require('../../../models/University');
 const Content = require('../../../models/Content');
 const Schedule = require('../../../models/Schedule');
+const Contact = require('../../../models/Contact');
 
 module.exports = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ module.exports = async (req, res) => {
     await Content.remove({ universityId: university._id });
     await Schedule.remove({ universityId: id });
     await Users.remove({ universityId: id });
+    await Contact.remove({ universityId: id });
     req.flash('alertMessage', 'Success delete university');
     req.flash('alertStatus', 'success');
     res.redirect('/admin/university');

@@ -18,8 +18,9 @@ const usersSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'University',
   },
-  panitiaId: {
-    type: Boolean,
+  contactId: {
+    type: ObjectId,
+    ref: 'Contact',
   },
 });
 

@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/admin/schedule?_method=PUT" method="POST">
+            <form action="/admin/user?_method=PUT" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -23,7 +23,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="id" class="id" name="id">
+                    <input type="hidden" class="id" name="id">
+                    <input type="hidden" class="universityId" name="universityId">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary id">Update</button>
                 </div>

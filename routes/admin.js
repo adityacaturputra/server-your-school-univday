@@ -31,6 +31,8 @@ router.delete('/schedule/:id', authSuper, adminController.schedule.deleteSchedul
 
 // User endpoint
 router.get('/user', adminController.user.viewUser);
+router.put('/user/', authPost, adminController.user.editUserContact);
+router.put('/user/:id/:universityId', authSuper, adminController.user.addRemoveUserContact);
 router.post('/user', authSuper, adminController.user.addUser);
 router.delete('/user/:id', authSuper, adminController.user.deleteUser);
 

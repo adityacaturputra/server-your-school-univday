@@ -9,7 +9,6 @@ module.exports = async (req, res) => {
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');
     const alert = { message: alertMessage, status: alertStatus };
-    console.log(content);
     res.render('admin/content/view_content', {
       title: 'Univday | Content', alert, action: 'edit', content, university, user: req.session.user,
     });
