@@ -1,5 +1,6 @@
 const University = require('../models/University');
 const Schedule = require('../models/Schedule');
+const Contact = require('../models/Contact');
 
 module.exports = {
   getAllUniversities: async (req, res) => {
@@ -21,6 +22,15 @@ module.exports = {
           populate: { path: 'imageId', select: '_id imageUrl' },
         });
       res.status(200).json({ schedule });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  },
+  getAllContactPerson: async (req, res) => {
+    try {
+      const contact = await Contact.find()
+        .populate({ path: 'universityId', select: '_id name' });
+      res.json(contact);
     } catch (error) {
       res.status(500).json({ error });
     }
