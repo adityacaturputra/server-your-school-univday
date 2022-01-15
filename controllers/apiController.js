@@ -28,8 +28,7 @@ module.exports = {
   },
   getAllContactPerson: async (req, res) => {
     try {
-      const contact = await Contact.find()
-        .populate({ path: 'universityId', select: '_id name' });
+      const contact = await Contact.find().select('_id name contact position');
       res.json(contact);
     } catch (error) {
       res.status(500).json({ error });
