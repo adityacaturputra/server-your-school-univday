@@ -28,6 +28,8 @@
                                 <!-- DataTales or Edit Page -->
                                 <% if (action === 'edit') { %>
                                     <%- include('./edit_content.ejs') %>
+                                <% } else if (action === 'add') { %>
+                                    <%- include('./add_content.ejs') %>
                                 <% } else { %>
                                     <%- include('./table_content.ejs') %>
                                 <% } %>
@@ -73,7 +75,6 @@
             </div>
         </div>
     </div>
-    <%- include('./add_modal.ejs') %>
             <%- include('../../partials/js.ejs') %>
                 <script>
                 CKEDITOR.replace('jeroanKonten');

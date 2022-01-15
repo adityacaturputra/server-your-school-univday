@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -43,4 +43,39 @@
             </form>
         </div>
     </div>
+</div> -->
+
+
+<div class="tab-pane fade show active" id="add-item" role="tabpanel" aria-labelledby="add-tab">
+    <form action="/admin/content" method="POST">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Title</label>
+                <input type="text" class="form-control" id="name" name="name"
+                    placeholder="Enter new content name" required>
+            </div>
+            <div class="form-group">
+                <label for="university">Universitas</label>
+                <select class="form-control" id="university" name="universityId" required>
+                    <option value="">Pilih Universitas</option>
+                    <% for( let i = 0; i < university.length; i++ ) { %>
+                        <% if (String(university[i]._id) === String(user.universityId)) { %>
+                            <option value="<%= university[i]._id %>" selected><%= university[i].name %></option>
+                        <% } %>
+                        <% if (user.universityId == null) { %>
+                            <option value="<%= university[i]._id %>"><%= university[i].name %></option>
+                        <% } %>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jeroanKonten">Konten</label>
+                <textarea class="form-control" id="jeroanKonten" placeholder="Enter content" name="jeroanKonten"
+                    required></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary">
+        </div>
+    </form>
 </div>

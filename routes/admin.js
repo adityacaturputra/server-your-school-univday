@@ -18,6 +18,7 @@ router.delete('/university/:id', authSuper, adminController.university.deleteUni
 
 // Content endpoint
 router.get('/content', adminController.content.viewContent);
+router.get('/content/add', adminController.content.viewAddContent);
 router.get('/content/:universityId/:id', authPost, adminController.content.viewEditContent);
 router.post('/content', authPost, adminController.content.addContent);
 router.put('/content/:id', authPost, adminController.content.editContent);
