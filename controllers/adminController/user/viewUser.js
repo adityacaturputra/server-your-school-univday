@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   try {
     const users = await Users.find()
       .populate({ path: 'universityId', select: '_id name' })
-      .populate({ path: 'contactId', select: '_id name contact' });
+      .populate({ path: 'contactId', select: '_id name contact position' });
     const university = await University.find();
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');

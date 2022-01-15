@@ -9,6 +9,9 @@ const contactSchema = new mongoose.Schema({
   contact: {
     type: String,
   },
+  position: {
+    type: String,
+  },
   universityId: {
     type: ObjectId,
     ref: 'University',

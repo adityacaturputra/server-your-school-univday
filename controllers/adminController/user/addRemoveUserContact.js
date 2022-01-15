@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
     if (!user.contactId) {
       const contact = await Contact.create({
-        name: 'name', contact: 'contact', universityId, userId: id,
+        name: '-', contact: '6285157716125', position: '-', universityId, userId: id,
       });
       user.contactId = contact.id;
       await user.save();

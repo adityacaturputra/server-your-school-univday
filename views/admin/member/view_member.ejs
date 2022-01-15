@@ -78,12 +78,14 @@
                     let id = $(this).data('id')
                     let name = $(this).data('name')
                     let contact = $(this).data('contact')
+                    let position = $(this).data('position')
                     let universityId = $(this).data('univid')
                     
                     $('#edit-modal').modal('show');
                     $('.id').val(id)
                     $('.name').val(name)
                     $('.contact').val(contact)
-                    $('.universityId').val(universityId)
+                    $('.position').val(position)
+                    $('.universityId').val(universityId) 
                 });
             </script>
