@@ -13,6 +13,17 @@ module.exports = {
       res.status(500).json({ error });
     }
   },
+  getUniversity: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const university = await University.findById(id).select('_id contentId name imageId')
+        .populate({ path: 'contentId', select: '_id name jeroanKonten' })
+        .populate({ path: 'imageId', select: '_id imageUrl' });
+      res.status(200).json({ university });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  },
   getAllSchedule: async (req, res) => {
     try {
       const schedule = await Schedule.find().select('_id name universityId timeStartDate timeEndDate')
