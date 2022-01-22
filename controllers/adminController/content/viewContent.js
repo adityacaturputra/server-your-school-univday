@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
     } else {
       content = await Content.find().populate({ path: 'universityId', select: '_id name' });
     }
+
+    content = content.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt));
     const university = await University.find();
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');

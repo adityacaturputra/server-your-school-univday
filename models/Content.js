@@ -15,6 +15,13 @@ const contentSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'University',
   },
+  createdAt: {
+    type: Date,
+  },
+  updatedAt: {
+    type: Date,
+  },
+
 });
 
 module.exports = mongoose.model('Content', contentSchema);

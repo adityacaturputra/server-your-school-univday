@@ -4,8 +4,10 @@ const Content = require('../../../models/Content');
 module.exports = async (req, res) => {
   try {
     const { name, universityId, jeroanKonten } = req.body;
-
-    const content = await Content.create({ name, jeroanKonten, universityId });
+    const currentDate = new Date();
+    const content = await Content.create({
+      name, jeroanKonten, universityId, createdAt: currentDate, updatedAt: currentDate,
+    });
     const university = await University.findOne({ _id: universityId });
     university.contentId.push(content._id);
     await university.save();

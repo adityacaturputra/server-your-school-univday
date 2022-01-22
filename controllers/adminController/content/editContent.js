@@ -19,6 +19,7 @@ module.exports = async (req, res) => {
     content.name = name;
     content.universityId = universityId;
     content.jeroanKonten = jeroanKonten;
+    content.updatedAt = new Date();
     await content.save();
     req.flash('alertMessage', 'Success update content');
     req.flash('alertStatus', 'success');

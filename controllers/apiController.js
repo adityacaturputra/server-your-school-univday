@@ -6,7 +6,7 @@ module.exports = {
   getAllUniversities: async (req, res) => {
     try {
       const university = await University.find().select('_id contentId name imageId')
-        .populate({ path: 'contentId', select: '_id name jeroanKonten' })
+        .populate({ path: 'contentId', select: '_id name jeroanKonten createdAt' })
         .populate({ path: 'imageId', select: '_id imageUrl' });
       res.status(200).json({ university });
     } catch (error) {
@@ -17,7 +17,7 @@ module.exports = {
     try {
       const { id } = req.params;
       const university = await University.findById(id).select('_id contentId name imageId')
-        .populate({ path: 'contentId', select: '_id name jeroanKonten' })
+        .populate({ path: 'contentId', select: '_id name jeroanKonten createdAt' })
         .populate({ path: 'imageId', select: '_id imageUrl' });
       res.status(200).json({ university });
     } catch (error) {
