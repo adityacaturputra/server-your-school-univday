@@ -5,9 +5,9 @@ module.exports = async (req, res) => {
   try {
     let content;
     if (req.session.user.universityId !== null) {
-      content = await Content.find({ universityId: req.session.user.universityId }).populate({ path: 'universityId', select: '_id name' });
+      content = await Content.find({ universityId: req.session.user.universityId }, '_id universityId name createdAt').populate({ path: 'universityId', select: '_id name' });
     } else {
-      content = await Content.find().populate({ path: 'universityId', select: '_id name' });
+      content = await Content.find({}, '_id universityId name createdAt').populate({ path: 'universityId', select: '_id name' });
     }
 
     content = content.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt));
