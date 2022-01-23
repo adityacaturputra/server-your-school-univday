@@ -15,6 +15,10 @@ const schedulesSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  place: {
+    type: String,
+    required: true,
+  },
   universityId: {
     type: ObjectId,
     ref: 'University',

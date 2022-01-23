@@ -18,6 +18,7 @@
                         <th>Universitas</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Place</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -47,6 +48,9 @@
                                 <%= schedule[i].timeEndDate %>
                             </td>
                             <td>
+                                <%= schedule[i].place %> 
+                            </td>
+                            <td>
                                 <% if (!schedule[i].universityId && !user.universityId) { %>
                                     <a href="javascript:void()" type="button"
                                     class="btn btn-warning btn-circle btn-sm button-update"
@@ -66,6 +70,7 @@
                                         data-universityid="<%= schedule[i].universityId.id %>"
                                         data-time-start-date="<%= schedule[i].timeStartDate %>"
                                         data-time-end-date="<%= schedule[i].timeEndDate %>"
+                                        data-place="<%= schedule[i].place %>"
                                         >
                                         <i class="fas fa-edit"></i></a>
                                     <% } %>

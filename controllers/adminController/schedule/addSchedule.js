@@ -3,7 +3,7 @@ const Schedule = require('../../../models/Schedule');
 module.exports = async (req, res) => {
   try {
     const {
-      name, timeStartDate, timeEndDate,
+      name, timeStartDate, timeEndDate, place,
     } = req.body;
     let { universityId } = req.body;
     const { userUniversityId } = req.session.user;
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     }
     if (!userUniversityId) {
       await Schedule.create({
-        name, universityId, timeStartDate, timeEndDate,
+        name, universityId, timeStartDate, timeEndDate, place,
       });
       req.flash('alertMessage', 'Success add Schedule');
       req.flash('alertStatus', 'success');

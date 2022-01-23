@@ -82,6 +82,7 @@
                         let universityId = $(this).data('universityid')
                         let timeStartDate = $(this).data('time-start-date')
                         let timeEndDate = $(this).data('time-end-date')
+                        let place = $(this).data('place')
 
                         $('#edit-modal').modal('show');
                         $('.id').val(id)
@@ -89,5 +90,6 @@
                         $('.universityId').val(universityId)
                         $('.time-start-date').val(timeStartDate)
                         $('.time-end-date').val(timeEndDate)
+                        $('.place').val(place)
                     });
                 </script>

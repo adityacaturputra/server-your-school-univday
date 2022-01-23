@@ -26,7 +26,7 @@ module.exports = {
   },
   getAllSchedule: async (req, res) => {
     try {
-      const schedule = await Schedule.find().select('_id name universityId timeStartDate timeEndDate')
+      const schedule = await Schedule.find().select('_id name universityId timeStartDate timeEndDate place')
         .populate({
           path: 'universityId',
           select: '_id name imageId',
