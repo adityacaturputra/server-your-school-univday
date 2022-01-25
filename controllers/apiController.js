@@ -5,10 +5,9 @@ const Contact = require('../models/Contact');
 module.exports = {
   getAllUniversities: async (req, res) => {
     try {
-      let university = await University.find().select('_id contentId name imageId')
+      const university = await University.find().select('_id contentId name imageId priorityLevel')
         .populate({ path: 'contentId', select: '_id name jeroanKonten createdAt' })
         .populate({ path: 'imageId', select: '_id imageUrl' });
-      university = university.sort((a, b) => b.priorityLevel - a.priorityLevel);
 
       res.status(200).json({ university });
     } catch (error) {
