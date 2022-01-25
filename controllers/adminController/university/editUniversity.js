@@ -3,10 +3,13 @@ const University = require('../../../models/University');
 
 module.exports = async (req, res) => {
   try {
-    const { universityId, name, image } = req.body;
+    const {
+      universityId, name, image, priorityLevel,
+    } = req.body;
     const university = await University.findOne({ _id: universityId });
     await Image.findOneAndUpdate({ _id: university.imageId }, { imageUrl: image });
     university.name = name;
+    university.priorityLevel = priorityLevel;
     await university.save();
     req.flash('alertMessage', 'Success update university');
     req.flash('alertStatus', 'success');

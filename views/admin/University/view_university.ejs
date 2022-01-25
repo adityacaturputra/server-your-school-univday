@@ -80,10 +80,12 @@
                         let id = $(this).data('id')
                         let name = $(this).data('name')
                         let image = $(this).data('image')
+                        let prioritylevel = $(this).data('prioritylevel')
 
                         $('#edit-modal').modal('show');
                         $('.id').val(id)
                         $('.name').val(name)
                         $('.image').val(image)
+                        $('.prioritylevel').val(parseInt(prioritylevel))
                     });
                 </script>

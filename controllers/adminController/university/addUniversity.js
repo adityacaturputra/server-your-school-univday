@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   try {
     const { name, image } = req.body;
     const savedImage = await Image.create({ imageUrl: image });
-    await University.create({ name, imageId: savedImage._id });
+    await University.create({ name, imageId: savedImage._id, priorityLevel: 1 });
     req.flash('alertMessage', 'Success add University');
     req.flash('alertStatus', 'success');
     res.redirect('/admin/university');

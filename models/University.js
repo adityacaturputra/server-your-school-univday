@@ -7,6 +7,9 @@ const universitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  priorityLevel: {
+    type: Number,
+  },
   imageId: {
     type: ObjectId,
     ref: 'Image',

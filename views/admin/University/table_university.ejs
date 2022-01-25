@@ -35,7 +35,11 @@
                                 <td>
                                     <a href="javascript:void()" type="button"
                                         class="btn btn-warning btn-circle btn-sm button-update"
-                                        data-id="<%= university[i].id %>" data-name="<%= university[i].name %>" data-image="<%= university[i].imageId.imageUrl %>">
+                                        data-id="<%= university[i].id %>" 
+                                        data-name="<%= university[i].name %>" 
+                                        data-image="<%= university[i].imageId.imageUrl %>"
+                                        data-prioritylevel="<%= university[i].priorityLevel %> "
+                                        >
                                         <i class="fas fa-edit"></i></a>
                                         <% if (user.universityId == null) { %>
                                             <form action="/admin/university/<%= university[i].id %>?_method=DELETE" method="POST"

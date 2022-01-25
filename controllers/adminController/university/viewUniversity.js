@@ -10,6 +10,8 @@ module.exports = async (req, res) => {
       university = await University.find()
         .populate({ path: 'imageId', select: 'id imageUrl' });
     }
+    university = university.sort((a, b) => b.priorityLevel - a.priorityLevel);
+    console.log(university);
     const alertMessage = req.flash('alertMessage');
     const alertStatus = req.flash('alertStatus');
     const alert = { message: alertMessage, status: alertStatus };
