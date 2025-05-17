@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
     req.flash('alertMessage', 'username tadinya sudah ada');
     req.flash('alertStatus', 'danger');
     res.redirect('/admin/user');
-    return;
   } catch (error) {
     console.log(error);
     req.flash('alertMessage', `Failed: ${error.message}`);

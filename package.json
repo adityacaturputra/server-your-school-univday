@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "build": "node --version"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,11 +24,13 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.3",
     "nodemon": "^2.0.12",
-    "startbootstrap-sb-admin-2": "^4.1.4"
+    "startbootstrap-sb-admin-2": "^4.1.4",
+    "dotenv": "^16.5.0"
   },
   "devDependencies": {
     "eslint": "^8.6.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4"
+    "eslint-plugin-import": "^2.25.4",
+    "prettier": "^3.5.3"
   }
 }

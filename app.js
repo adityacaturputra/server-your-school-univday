@@ -7,11 +7,13 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const cors = require('cors');
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config();
 
 // import mongoose
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://adityacaturputra:sqkAmfiERitQGuCT@cluster0.reduu.mongodb.net/db_your_school_univday?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -36,13 +38,15 @@ app.use(cors());
 app.use(methodOverride('_method'));
 
 // use express-session
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  rolling: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 },
-}));
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    rolling: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  }),
+);
 
 // use connect-flash
 app.use(flash());
@@ -52,7 +56,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/sb-admin-2', express.static(path.join(__dirname, 'node_modules/startbootstrap-sb-admin-2'))); // menambahkan static file untuk sb-admin-2
+app.use(
+  '/sb-admin-2',
+  express.static(
+    path.join(__dirname, 'node_modules/startbootstrap-sb-admin-2'),
+  ),
+); // menambahkan static file untuk sb-admin-2
 
 app.use('/', indexRouter);
 // admin routes
